@@ -4,7 +4,7 @@ import { GithubUser, Repo, UserDetail } from '../infra/types/github';
 import { BASE_GITHUB_URL, endpoints } from '../shared/constants/github';
 
 export class GithubService {
-  async listUsers(since?: number): Promise<{ users: GithubUser[]; nextPageLink: string }> {
+  async listUsers(since?: number): Promise<{ users: GithubUser[]; next: string }> {
     const url = this.generateUrl(endpoints.users);
 
     const response = await axios.get<GithubUser[]>(url, {
@@ -12,9 +12,9 @@ export class GithubService {
     });
 
     const users = response?.data ?? [];
-    const nextPageLink = response.headers.link ?? '';
+    const next = response.headers.link ?? '';
 
-    return { users, nextPageLink };
+    return { users, next };
   }
 
   async getUser(username: string): Promise<UserDetail> {
