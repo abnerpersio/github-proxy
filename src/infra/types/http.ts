@@ -1,4 +1,4 @@
-type HttpStatus = 200 | 201;
+type HttpStatus = 200;
 
 export type HttpResponse = {
   status: HttpStatus;
