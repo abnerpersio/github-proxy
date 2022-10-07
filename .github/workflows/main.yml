@@ -13,7 +13,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Heroku Docker Container Deploy
       - uses: actions/checkout@v2
       - uses: AkhileshNS/heroku-deploy@v3.12.12
         with:
