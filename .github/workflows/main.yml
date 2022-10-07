@@ -21,5 +21,4 @@ jobs:
           heroku_app_name: ${{ env.HEROKU_APP_NAME }}
           usedocker: true
           docker_heroku_process_type: web
-          healthcheck: /health
           delay: 60
