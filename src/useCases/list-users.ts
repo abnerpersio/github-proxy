@@ -3,7 +3,6 @@ import { CreateResponse } from '../infra/utils/create-reponse';
 import { GithubService } from '../services/github-service';
 import { NEXT_LINK_REGEX } from '../shared/constants/regex';
 import { routeMapping } from '../shared/constants/route';
-import { BASE_PROJECT_URL } from '../shared/constants/url';
 
 type Params = {
   since?: number;
@@ -18,15 +17,12 @@ export class ListUsersUseCase implements UseCase<Params> {
     const { users, next } = await this.githubService.listUsers(since);
 
     const nextPage = this.getNextPage(next);
-
-    const nextPageLink = nextPage
-      ? `${BASE_PROJECT_URL}${routeMapping.listUsers}?since=${nextPage}`
-      : undefined;
+    const nextPageLink = `${routeMapping.listUsers}?since=${nextPage}`;
 
     const extraData = {
       metadata: {
         results: users.length,
-        nextPage,
+        nextPage: parseInt(nextPage),
         nextPageLink,
       },
     };
@@ -35,6 +31,6 @@ export class ListUsersUseCase implements UseCase<Params> {
   }
 
   private getNextPage(url: string) {
-    return url.match(NEXT_LINK_REGEX)?.groups?.since ?? undefined;
+    return url.match(NEXT_LINK_REGEX)?.groups?.since ?? '';
   }
 }
