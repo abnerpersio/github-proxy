@@ -14,9 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Heroku Docker Container Deploy
-        uses: lucassarcanjo/heroku-deploy@2.1.17
+        uses: AkhileshNS/heroku-deploy@v3.12.12
         with:
-          email: ${{ env.HEROKU_EMAIL }}
-          api_key: ${{ env.HEROKU_API_KEY }}
-          app_name: ${{ env.HEROKU_APP_NAME }}
-          dockerfile_path: Dockerfile
+          heroku_api_key: ${{ env.HEROKU_API_KEY }}
+          heroku_email: ${{ env.HEROKU_EMAIL }}
+          heroku_app_name: ${{ env.HEROKU_APP_NAME }}
+          usedocker: true
+          docker_heroku_process_type: web
+          healthcheck: /health
+          delay: 60
