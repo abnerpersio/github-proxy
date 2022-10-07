@@ -7,7 +7,7 @@
   "main": "src/index.ts",
   "license": "MIT",
   "scripts": {
-    "build": "esbuild --bundle --format=cjs --platform=node --target=node16 --outfile=dist/index.js",
+    "build": "rimraf dist && esbuild src/index.ts --bundle --format=cjs --platform=node --target=node16 --outfile=dist/index.js",
     "dev": "ts-node-dev --respawn src/index.ts",
     "test": "jest"
   },
@@ -25,7 +25,7 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.39.0",
-    "esbuild": "^0.15.10",
+    "esbuild": "^0.14.22",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^23.0.0",
